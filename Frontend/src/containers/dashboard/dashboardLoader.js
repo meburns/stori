@@ -1,12 +1,12 @@
 import React from "react";
 // import axios from "axios";
 
+import Dashboard from "./dashboard.js";
+
 // DASHBOARD LOADER
 class DashboardLoader extends React.Component {
   render() {
-    return (
-      <h1>Dashboard</h1>
-    );
+    return <Dashboard/>;
   }
 }
 
