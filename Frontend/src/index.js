@@ -7,12 +7,14 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import './index.css';
 
 import DashboardLoader from "./containers/dashboard/dashboardLoader.js";
+import TimelineLoader from "./containers/timeline/timelineLoader.js";
 
 const App = () => (
   <MuiThemeProvider>
     <CssBaseline />
     <BrowserRouter>
       <Switch>
+        <Route path="/timeline" component={TimelineLoader} />
         <Route path="/" component={DashboardLoader} />
       </Switch>
     </BrowserRouter>
