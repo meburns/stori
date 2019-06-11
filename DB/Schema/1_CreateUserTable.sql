@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 /* Bootstrap Table Data */
 INSERT INTO users (name, email, encrypted_password, created_at, updated_at)
-VALUES ("Mike Burns", "meburns90@gmail.com", "not-encrypted", now(), now()),
-       ("Kee Lin Chia", "keelinchia@gmail.com", "not-encrypted", now(), now());
+VALUES ('Mike Burns', 'meburns90@gmail.com', 'not-encrypted', now(), now()),
+       ('Kee Lin Chia', 'keelinchia@gmail.com', 'not-encrypted', now(), now());
 
 COMMIT;
