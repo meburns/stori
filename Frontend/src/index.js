@@ -10,18 +10,33 @@ import './index.css';
 
 import DashboardLoader from "./containers/dashboard/dashboardLoader.js";
 import TimelineLoader from "./containers/timeline/timelineLoader.js";
+import UserLoader from "./containers/user/userLoader.js";
 
 const token = _.getOrSetCookie();
 
 const App = () => (
   <MuiThemeProvider>
     <CssBaseline />
-    <BrowserRouter>
-      <Switch>
-        <Route path="/timeline" component={TimelineLoader} />
-        <Route path="/" component={DashboardLoader} />
-      </Switch>
-    </BrowserRouter>
+
+    {!token && (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" component={UserLoader} />
+          <Route path="/" component={DashboardLoader} />
+        </Switch>
+      </BrowserRouter>
+    )}
+    {token && (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/timeline" component={TimelineLoader} />
+          <Route path="/login" component={UserLoader} />
+          <Route path="/logout" component={UserLoader} />
+          <Route path="/" component={DashboardLoader} />
+        </Switch>
+      </BrowserRouter>
+    )}
+
   </MuiThemeProvider>
 );
 
