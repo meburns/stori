@@ -12,7 +12,6 @@ import DashboardLoader from "./containers/dashboard/dashboardLoader.js";
 import TimelineLoader from "./containers/timeline/timelineLoader.js";
 
 const token = _.getOrSetCookie();
-console.log(token);
 
 const App = () => (
   <MuiThemeProvider>
