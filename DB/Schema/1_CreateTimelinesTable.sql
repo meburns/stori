@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS timelines (
   user_id                  integer REFERENCES users (id),
 	data                     text,
 	created_at               timestamp,
-	updated_at               timestamp,
+	updated_at               timestamp
 );
 
 COMMIT;
