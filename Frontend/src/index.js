@@ -7,6 +7,7 @@ import _ from "./util.js";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import './index.css';
 
+import TopMenuLoader from "./containers/menu/topMenuLoader.js";
 import DashboardLoader from "./containers/dashboard/dashboardLoader.js";
 import TimelineLoader from "./containers/timeline/timelineLoader.js";
 import UserLoader from "./containers/user/userLoader.js";
@@ -25,6 +26,7 @@ const App = () => (
         </Switch>
       </BrowserRouter>
     )}
+    {token && <TopMenuLoader/>}
     {token && (
       <BrowserRouter>
         <Switch>
