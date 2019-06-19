@@ -1,4 +1,4 @@
-package com.stori.response;
+package com.stori.message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.stori.response;
+package com.stori.message;
 
 public class StringResponse {
 	

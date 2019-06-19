@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stori.model.User;
+import com.stori.model.UserPrinciple;
 import com.stori.repository.UserRepository;
  
 @Service

@@ -12,8 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.stori.security.TokenAuthenticationFilter;
+import com.stori.security.JwtAuthEntryPoint;
+import com.stori.security.JwtAuthTokenFilter;
+import com.stori.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
