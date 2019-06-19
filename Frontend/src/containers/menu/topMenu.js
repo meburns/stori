@@ -25,10 +25,10 @@ function TopMenu({ classes }) {
   return (
     <AppBar position="sticky" className={classes.menu}>
       <Toolbar>
-        <Grid container justify="flex-end" alignItems="center">
+        <Grid container justify="space-between" alignItems="center">
           <Grid item xs={10}>
             <Typography variant="h3">
-              stori
+              <a href="/" className={classes.menuTitle}>stori</a>
             </Typography>
           </Grid>
           <Grid item xs={2} className={classes.userIcon}>
@@ -67,7 +67,14 @@ function TopMenu({ classes }) {
 }
 
 const styles = {
-  menu: { background: '#479a7c' },
+  menu: { background: '#26d291' },
+  menuTitle: { background: '-webkit-linear-gradient(45deg, #1e13cc, #0579b1 50%)',
+    '-webkit-background-clip': 'text',
+    '-webkit-text-fill-color': 'transparent',
+    '&:hover': {
+      opacity: '0.5'
+    }
+  },
   userIcon: { textAlign: "right" }
 };
 
