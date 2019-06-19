@@ -17,7 +17,7 @@ const token = _.getOrSetCookie();
 const App = () => (
   <div>
     <CssBaseline />
-
+    <TopMenuLoader/>
     {!token && (
       <BrowserRouter>
         <Switch>
@@ -26,7 +26,6 @@ const App = () => (
         </Switch>
       </BrowserRouter>
     )}
-    {token && <TopMenuLoader/>}
     {token && (
       <BrowserRouter>
         <Switch>
