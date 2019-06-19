@@ -2,6 +2,7 @@ package com.stori.model;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.mapping.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -40,6 +40,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private long id;
+	
+	@Column(name = "name")
+	@NotFound(action = NotFoundAction.EXCEPTION)
+	private String name;
 
 	@Column(name = "username")
 	@NotFound(action = NotFoundAction.EXCEPTION)
