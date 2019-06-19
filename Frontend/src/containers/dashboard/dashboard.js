@@ -14,7 +14,11 @@ function getRows(classes) {
       <Grid item xs={12} key={i} className={classes.row} style={{ background: `url(${process.env.PUBLIC_URL}${row.backgroundImage}) no-repeat center center fixed` }}>
         <Grid container className={classes.main}>
           <Grid item xs={12} className={classes.topRow}>
-            <Typography variant="h1">{row.name}</Typography>
+            <a href={row.link} className={classes.link}>
+              <Typography variant="h1">
+                {row.name}
+              </Typography>
+            </a>
           </Grid>
           <Grid item xs={12} className={classes.bottomRow}>
             <Typography variant="h5">{row.description}</Typography>
@@ -47,7 +51,18 @@ const styles = {
     }
   },
   topRow: { opacity: '0.9', background: "#353535", color: "#FFF", padding: "20px 40px", minHeight: "100px" },
-  bottomRow: { opacity: '0.7', background: "#353535", color: "#FFF", padding: "20px", minHeight: "400px" }
+  bottomRow: { opacity: '0.7', background: "#353535", color: "#FFF", padding: "20px", minHeight: "400px" },
+  link: {
+    color: "inherit !important",
+    textDecoration: "none",
+    "& *": {
+      'transition-duration': '0.5s'
+    },
+    "&:hover *": {
+      opacity: "0.7",
+      padding: "0px 40px"
+    }
+  }
 };
 
 export default withStyles(styles)(Dashboard);
