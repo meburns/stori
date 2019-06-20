@@ -23,6 +23,7 @@ import com.stori.service.UserDetailsServiceImpl;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Bean
 	public PasswordEncoder getEncoder() {
 		return new BCryptPasswordEncoder();
