@@ -1,4 +1,4 @@
-package com.stori.response;
+package com.stori.message;
 
 import org.springframework.stereotype.Service;
 
