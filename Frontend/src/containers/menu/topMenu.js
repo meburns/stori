@@ -56,8 +56,8 @@ function TopMenu({ classes }) {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Sign In</MenuItem>
-              <MenuItem onClick={handleClose}>Create Account</MenuItem>
+              <a href="/login"><MenuItem>Sign In</MenuItem></a>
+              <a href="/register"><MenuItem>Create Account</MenuItem></a>
             </Menu>
           </Grid>
         </Grid>

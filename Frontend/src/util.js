@@ -16,6 +16,11 @@ function getOrSetCookie() {
   return token;
 }
 
+function setCookie(token) {
+  document.cookie = "auth_token=" + token + ";";
+}
+
 module.exports = {
-  getOrSetCookie: getOrSetCookie
+  getOrSetCookie: getOrSetCookie,
+  setCookie: setCookie
 };
