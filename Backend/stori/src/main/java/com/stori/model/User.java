@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,7 +56,6 @@ public class User {
 	private String email;
 
 	@Column(name = "password")
-	@NotFound(action = NotFoundAction.EXCEPTION)
 	private String password;
 
 	@ManyToMany(fetch = FetchType.LAZY)
@@ -63,6 +63,12 @@ public class User {
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
+	
+	@OneToOne
+	@JoinTable(name = "user_timelines", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "timeline_id"))
+	private Timeline timeline;
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
@@ -129,5 +135,13 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public Timeline getTimeline() {
+		return this.timeline;
+	}
+
+	public void setTimeline(Timeline timeline) {
+		this.timeline = timeline;
 	}
 }
