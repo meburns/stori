@@ -20,7 +20,12 @@ function setCookie(token) {
   document.cookie = "auth_token=" + token + ";";
 }
 
+function updateURL(url) {
+  window.location = url;
+}
+
 module.exports = {
   getOrSetCookie: getOrSetCookie,
-  setCookie: setCookie
+  setCookie: setCookie,
+  updateURL: updateURL
 };

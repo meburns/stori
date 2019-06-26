@@ -19,13 +19,15 @@ class UserLoader extends React.Component {
 
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_STORI_API_URL}/test/user`, // TODO: replace with actual user api endpoint
+      url: `${process.env.REACT_APP_STORI_API_URL}/auth/signin`,
       data: formData,
       crossDomain: true
     })
       .then(res => {
         let data = res.data;
-        _.setCookie(data.token);
+        let token = data.accessToken;
+        _.setCookie(token);
+        _.updateURL("/");
       })
       .catch(e => {
         console.log(e);

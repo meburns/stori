@@ -11,17 +11,15 @@ function User({ handleSubmit, classes }) {
         <Grid item xs={10} className={classes.row}>
           <h1>Login</h1>
         </Grid>
-        <Grid item xs={5} className={classes.row}>
-          <label>Email</label>
+        <Grid item xs={7} className={classes.row}>
+          <label>
+            Username <input name="username" type="text" />
+          </label>
         </Grid>
-        <Grid item xs={5} className={classes.row}>
-          <input type="text" />
-        </Grid>
-        <Grid item xs={5} className={classes.row}>
-          <label>Password</label>
-        </Grid>
-        <Grid item xs={5} className={classes.row}>
-          <input type="password" />
+        <Grid item xs={7} className={classes.row}>
+          <label>
+            Password <input name="password" type="password" />
+          </label>
         </Grid>
         <Grid item xs={5} className={classes.row}>
           <input type="submit"/>
