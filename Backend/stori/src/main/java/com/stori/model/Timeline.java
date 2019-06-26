@@ -12,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,6 +24,7 @@ public class Timeline {
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private long id;
 	
+	@NaturalId 
 	@Column(name = "username")
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private String username;
