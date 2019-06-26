@@ -22,6 +22,10 @@ public class Timeline {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private long id;
+	
+	@Column(name = "username")
+	@NotFound(action = NotFoundAction.EXCEPTION)
+	private String username;
 
 	@Column(name = "name")
 	@NotFound(action = NotFoundAction.EXCEPTION)
@@ -39,8 +43,25 @@ public class Timeline {
 	
 	public Timeline() {}
 	
-	public Timeline(String name) {
-		name = this.name;
+	public Timeline(String username, String name) {
+		this.username = username;
+		this.name = name;
+	}
+	
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;	
 	}
 	
 	public String getName() {
