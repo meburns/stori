@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid';
 
 import { withStyles } from "@material-ui/core/styles";
 
-// USER
-function User({ handleSubmit, classes }) {
+// USER Login
+function Login({ handleSubmit, classes }) {
   return (
     <Grid container className={classes.main} justify="center">
       <form onSubmit={handleSubmit}>
@@ -33,4 +33,4 @@ const styles = {
   main: { padding: "10px" }
 };
 
-export default withStyles(styles)(User);
+export default withStyles(styles)(Login);
