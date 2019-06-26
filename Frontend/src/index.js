@@ -22,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={UserLoader} />
+          <Route path="/register" component={UserLoader} />
           <Route path="/" component={DashboardLoader} />
         </Switch>
       </BrowserRouter>
