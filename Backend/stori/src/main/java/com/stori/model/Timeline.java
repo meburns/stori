@@ -3,13 +3,14 @@ package com.stori.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.NaturalId;
@@ -17,6 +18,12 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
+@Entity
+@Table(name = "timeline", uniqueConstraints = {
+		@UniqueConstraint(columnNames = {
+				"username"
+		})
+}) 
 public class Timeline {
 	
 	@Id 
