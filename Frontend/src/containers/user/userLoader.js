@@ -35,6 +35,9 @@ class UserLoader extends React.Component {
   }
 
   render() {
+    if (this.props.match.path === "/logout") {
+      _.deleteCookie();
+    }
     return <User handleSubmit={this.handleSubmit}/>;
   }
 }

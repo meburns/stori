@@ -8,11 +8,13 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from "@material-ui/core/styles";
+import _ from "../../util.js";
 
 // TOP MENU
 function TopMenu({ classes }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const token = _.getOrSetCookie();
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget);
@@ -56,8 +58,17 @@ function TopMenu({ classes }) {
               open={open}
               onClose={handleClose}
             >
-              <a href="/login"><MenuItem>Sign In</MenuItem></a>
-              <a href="/register"><MenuItem>Create Account</MenuItem></a>
+              { !token && (
+                <p>
+                  <a href="/login"><MenuItem>Sign In</MenuItem></a>
+                  <a href="/register"><MenuItem>Create Account</MenuItem></a>
+                </p>
+              )}
+              { token && (
+                <p>
+                  <a href="/logout"><MenuItem>Sign Out</MenuItem></a>
+                </p>
+              )}
             </Menu>
           </Grid>
         </Grid>
