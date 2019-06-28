@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -64,8 +65,8 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToOne
-	@JoinTable(name = "user_timelines", 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinTable(name = "user_timeline", 
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "timeline_id"))
 	private Timeline timeline;
