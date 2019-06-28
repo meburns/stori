@@ -19,7 +19,7 @@ import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "timeline", uniqueConstraints = {
+@Table(name = "timelines", uniqueConstraints = {
 		@UniqueConstraint(columnNames = {
 				"username"
 		})
@@ -29,7 +29,7 @@ public class Timeline {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotFound(action = NotFoundAction.EXCEPTION)
-	private long id;
+	private Long id;
 	
 	@NaturalId 
 	@Column(name = "username")
@@ -79,5 +79,13 @@ public class Timeline {
 	
 	public void setName(String name) {
 		this.name = name;	
+	}
+	
+	public Date getUpdated_at() {
+		return this.updated_at;
+	}
+	
+	public Date getCreated_at() {
+		return this.created_at;
 	}
 }
