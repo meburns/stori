@@ -22,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Switch>
           <Route path="/login" component={UserLoader} />
+          <Route path="/register" component={UserLoader} />
           <Route path="/" component={DashboardLoader} />
         </Switch>
       </BrowserRouter>
@@ -30,7 +31,6 @@ const App = () => (
       <BrowserRouter>
         <Switch>
           <Route path="/timeline" component={TimelineLoader} />
-          <Route path="/login" component={UserLoader} />
           <Route path="/logout" component={UserLoader} />
           <Route path="/" component={DashboardLoader} />
         </Switch>

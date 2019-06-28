@@ -20,7 +20,17 @@ function setCookie(token) {
   document.cookie = "auth_token=" + token + ";";
 }
 
+function deleteCookie() {
+  document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+}
+
+function updateURL(url) {
+  window.location = url;
+}
+
 module.exports = {
   getOrSetCookie: getOrSetCookie,
-  setCookie: setCookie
+  setCookie: setCookie,
+  deleteCookie: deleteCookie,
+  updateURL: updateURL
 };
