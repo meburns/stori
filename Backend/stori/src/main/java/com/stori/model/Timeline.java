@@ -1,12 +1,21 @@
 package com.stori.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,7 +48,13 @@ public class Timeline {
 	@Column(name = "name")
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private String name;
-
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "timeline_boxes", 
+	joinColumns = @JoinColumn(name = "timeline_id"), 
+	inverseJoinColumns = @JoinColumn(name = "box_id"))
+	private List<Box> boxes = new ArrayList<>();
+	
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at")
