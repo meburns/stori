@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import { Container, Draggable } from 'react-smooth-dnd';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import { withStyles } from "@material-ui/core/styles";
 
 const initialData = [
@@ -9,55 +9,134 @@ const initialData = [
     id: '1',
     name: 'column #1',
     data: [
-      { id: '1', value: 'value #1' },
-      { id: '2', value: 'value #2' },
-      { id: '3', value: 'value #3' }
+      { id: '1', content: 'value #1' },
+      { id: '2', content: 'value #2' },
+      { id: '3', content: 'value #3' }
     ]
   },
   {
     id: '2',
     name: 'column #2',
     data: [
-      { id: '4', value: 'value #4' },
-      { id: '5', value: 'value #5' },
-      { id: '6', value: 'value #6' }
+      { id: '4', content: 'value #4' },
+      { id: '5', content: 'value #5' },
+      { id: '6', content: 'value #6' }
     ]
   },
   {
     id: '3',
     name: 'column #3',
     data: [
-      { id: '7', value: 'value #7' },
-      { id: '8', value: 'value #8' },
-      { id: '9', value: 'value #9' }
+      { id: '7', content: 'value #7' },
+      { id: '8', content: 'value #8' },
+      { id: '9', content: 'value #9' }
     ]
   }
 ];
 
 // TIMELINE
-class Timeline extends React.Component {
-  render() {
+function Timeline({ classes }) {
+  document.title = "Timeline";
+  // TODO: grab data from the backend
+  const [state, setState] = useState({ timelineData: initialData });
+
+  function reorder(list, source, destination) {
+    let newList = Array.from(list);
+    let [movedItem] = newList[source.droppableId].data.splice(source.index, 1);
+    newList[destination.droppableId].data.splice(destination.index, 0, movedItem);
+
+    return newList;
+  }
+
+  function onDragEnd(result) {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      state.timelineData,
+      result.source,
+      result.destination
+    );
+
+    setState({
+      timelineData: JSON.parse(JSON.stringify(items))
+    });
+  }
+
+  function getColumns() {
+    let columns = [];
+
+    for (var i=0; i < state.timelineData.length; i++) {
+      const column = state.timelineData[i];
+      if (column.data) {
+        columns.push(
+          <Droppable droppableId={`${i}`} key={i}>
+            {(provided, snapshot) => (
+              <Grid
+                item
+                xs={3}
+              >
+                <Card
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  style={{ padding: "20px", margin: "5px" }}
+                >
+                  {column.data.map((item, index) => (
+                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                      {(provided, snapshot) => (
+                        <Card
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <p style={{ padding: "20px" }}>
+                            {item.content}
+                          </p>
+                        </Card>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </Card>
+              </Grid>
+            )}
+          </Droppable>
+        );
+      }
+    }
+
     return (
-      <Grid container>
-        <Grid item xs={12}>
-          <h1>My Timeline</h1>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid container>
-            <Grid item xs={12}>
-              <div>
-                not working yet
-              </div>
-            </Grid>
-          </Grid>
-        </Grid>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {columns}
+      </DragDropContext>
+    );
+  }
+
+  return (
+    <Grid container>
+      <Grid item xs={12}>
+        <h1>My Timeline</h1>
       </Grid>
-    )
-  };
+      <Grid item xs={12}>
+        <Card
+          style={{ padding: "20px", margin: "5px" }}
+        >
+          <Grid container>
+            {getColumns()}
+          </Grid>
+        </Card>
+      </Grid>
+    </Grid>
+  );
 }
 
 const styles = {
   main: { padding: "10px" },
+  column: {
+    padding: "5px;"
+  },
   row: {
     minHeight: "200px",
     "&:nth-child(even)": {
