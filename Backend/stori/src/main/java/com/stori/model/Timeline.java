@@ -28,22 +28,13 @@ import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "timelines", uniqueConstraints = {
-		@UniqueConstraint(columnNames = {
-				"username"
-		})
-}) 
+@Table(name = "timelines")
 public class Timeline {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private Long id;
-	
-	@NaturalId 
-	@Column(name = "username")
-	@NotFound(action = NotFoundAction.EXCEPTION)
-	private String username;
 
 	@Column(name = "name")
 	@NotFound(action = NotFoundAction.EXCEPTION)
@@ -67,9 +58,9 @@ public class Timeline {
 	
 	public Timeline() {}
 	
-	public Timeline(String username, String name) {
-		this.username = username;
+	public Timeline(String name, List<Box> boxes) {
 		this.name = name;
+		this.boxes = boxes;
 	}
 	
 	public Long getId() {
@@ -78,14 +69,6 @@ public class Timeline {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public String getUsername() {
-		return this.username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;	
 	}
 	
 	public String getName() {

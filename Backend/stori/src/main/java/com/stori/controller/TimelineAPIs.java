@@ -32,12 +32,14 @@ public class TimelineAPIs {
 
 	@PostMapping("/create")
 	@PreAuthorize("#username == authentication.principal.username")
-	public ResponseEntity<String> createTimeline(@PathVariable("username") String username) {
+	public ResponseEntity<String> createTimeline
+	(@PathVariable("username") String username, 
+			Timeline timeline) {
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> 
 				new UsernameNotFoundException("User Not Found with -> username: " + username)
 						);
-		Timeline timeline = new Timeline(username, user.getName() + "'s Timeline");
+	
 		user.setTimeline(timeline);
 
 		userRepository.save(user);

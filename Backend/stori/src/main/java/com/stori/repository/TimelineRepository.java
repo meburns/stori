@@ -9,6 +9,6 @@ import com.stori.model.Timeline;
 
 @Repository
 public interface TimelineRepository extends JpaRepository<Timeline, Long> {
-	Optional<Timeline> findByUsername(String username);
-	Boolean existsByUsername(String username);
+	Optional<Timeline> findByName(String name);
+	Boolean existsByName(String name);
 }
