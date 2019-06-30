@@ -96,6 +96,14 @@ public class Timeline {
 		this.name = name;	
 	}
 	
+	public List<Box> getBoxes() {
+		return this.boxes;
+	}
+	
+	public void setBoxes(List<Box> boxes) {
+		this.boxes = boxes;	
+	}
+	
 	public Date getUpdated_at() {
 		return this.updated_at;
 	}
