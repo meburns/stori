@@ -145,4 +145,12 @@ public class User {
 	public void setTimeline(Timeline timeline) {
 		this.timeline = timeline;
 	}
+	
+	public Date getUpdated_at() {
+		return this.updated_at;
+	}
+	
+	public Date getCreated_at() {
+		return this.created_at;
+	}
 }
