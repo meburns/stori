@@ -2,43 +2,14 @@ import React, { useState } from "react";
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import { setLocalStorage } from "../../util.js";
 import { withStyles } from "@material-ui/core/styles";
 
-const initialData = [
-  {
-    id: '1',
-    name: 'column #1',
-    data: [
-      { id: '1', content: 'value #1' },
-      { id: '2', content: 'value #2' },
-      { id: '3', content: 'value #3' }
-    ]
-  },
-  {
-    id: '2',
-    name: 'column #2',
-    data: [
-      { id: '4', content: 'value #4' },
-      { id: '5', content: 'value #5' },
-      { id: '6', content: 'value #6' }
-    ]
-  },
-  {
-    id: '3',
-    name: 'column #3',
-    data: [
-      { id: '7', content: 'value #7' },
-      { id: '8', content: 'value #8' },
-      { id: '9', content: 'value #9' }
-    ]
-  }
-];
-
 // TIMELINE
-function Timeline({ classes }) {
+function Timeline({ data, classes }) {
   document.title = "Timeline";
   // TODO: grab data from the backend
-  const [state, setState] = useState({ timelineData: initialData });
+  const [state, setState] = useState({ timelineData: JSON.parse(data) });
 
   function reorder(list, source, destination) {
     let newList = Array.from(list);
@@ -63,6 +34,7 @@ function Timeline({ classes }) {
     setState({
       timelineData: JSON.parse(JSON.stringify(items))
     });
+    setLocalStorage("timelineData", JSON.stringify(items));
   }
 
   function getColumns() {

@@ -28,9 +28,24 @@ function updateURL(url) {
   window.location = url;
 }
 
+function setLocalStorage(key, value) {
+  window.localStorage.setItem(key, value);
+}
+
+function getLocalStorage(key) {
+  return window.localStorage.getItem(key);
+}
+
+function deleteLocalStorage(key) {
+  window.localStorage.removeItem(key);
+}
+
 module.exports = {
   getOrSetCookie: getOrSetCookie,
   setCookie: setCookie,
   deleteCookie: deleteCookie,
+  setLocalStorage: setLocalStorage,
+  getLocalStorage: getLocalStorage,
+  deleteLocalStorage: deleteLocalStorage,
   updateURL: updateURL
 };
