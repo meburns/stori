@@ -1,11 +1,13 @@
 package com.stori.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,7 @@ import com.stori.model.User;
 import com.stori.repository.TimelineRepository;
 import com.stori.repository.UserRepository;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/{username}/timeline")
 public class TimelineAPIs {
@@ -67,8 +70,13 @@ public class TimelineAPIs {
 				new UsernameNotFoundException("User Not Found with -> username: " + username)
 						);
 		
-		Long timelineId = user.getTimeline().getId();
+		Timeline oldTimeline = user.getTimeline();
+		Long timelineId = oldTimeline.getId();
+		Date created_at = oldTimeline.getCreated_at();
+		
+		timeline.setCreated_at(created_at);
 		timeline.setId(timelineId);
+		
 		user.setTimeline(timeline);
 		userRepository.save(user);
 
