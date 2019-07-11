@@ -40,7 +40,7 @@ public class Timeline {
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private String name;
 	
-	@Column(name = "data")
+	@Column(name = "data", length = 10485760) 
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private String data;
 	
@@ -99,11 +99,15 @@ public class Timeline {
 		this.boxes = boxes;	
 	}
 	
+	public Date getCreated_at() {
+		return this.created_at;
+	}
+	
 	public Date getUpdated_at() {
 		return this.updated_at;
 	}
 	
-	public Date getCreated_at() {
-		return this.created_at;
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
 	}
 }
