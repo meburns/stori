@@ -41,16 +41,21 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
                     FilterChain filterChain) 
                         throws ServletException, IOException {
         try {
-          
+        	/* JWT authentication -> User is authenticated for every request */
             String jwt = getJwt(request);
             if (jwt!=null && tokenProvider.validateJwtToken(jwt)) {
                 String username = tokenProvider.getUserNameFromJwtToken(jwt);
  
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                
+                // Create fully populated authentication object
                 UsernamePasswordAuthenticationToken authentication 
                     = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+               
+                // Make the authentication object request-specific
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
  
+                //Store the authentication object in the SecurityContext 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {

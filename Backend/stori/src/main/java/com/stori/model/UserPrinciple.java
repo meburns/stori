@@ -1,6 +1,7 @@
 package com.stori.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +11,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/* Use this instead of the actual User class to avoid making User
+ * serializable. */
+
 public class UserPrinciple implements UserDetails {
+	/* To guarantee a consistent serialVersionUID 
+	 * value across different java compiler implementations, 
+	 * a serializable class must declare an explicit 
+	 * serialVersionUID value */
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
