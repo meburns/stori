@@ -12,7 +12,7 @@ import { setLocalStorage } from "../../util.js";
 import { withStyles } from "@material-ui/core/styles";
 
 // TIMELINE
-function Timeline({ data, classes }) {
+function Timeline({ data, updateData, classes }) {
   document.title = "Timeline";
   // TODO: grab data from the backend
   const [state, setState] = useState({ timelineData: JSON.parse(data) });
@@ -62,6 +62,7 @@ function Timeline({ data, classes }) {
       timelineData: JSON.parse(JSON.stringify(newData))
     });
     setLocalStorage("timelineData", JSON.stringify(newData));
+    updateData(JSON.stringify(newData));
   }
 
   function getColumns() {

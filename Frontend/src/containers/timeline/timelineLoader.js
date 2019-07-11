@@ -43,35 +43,51 @@ class TimelineLoader extends React.Component {
     //   data = JSON.stringify(initialData);
     //   _setLocalStorage("timelineData", data);
     // }
-    this.state = {};
+    this.state = { username: _.getLocalStorage("username")};
 
     let data = null;
-    let username = _.getLocalStorage("username");
 
     axios({
       method: "GET",
-      url: `${process.env.REACT_APP_STORI_API_URL}/${username}/timeline`,
+      url: `${process.env.REACT_APP_STORI_API_URL}/${this.state.username}/timeline`,
       headers: { Authorization: _.getLocalStorage("auth_token")},
       crossDomain: true
     })
-      .then(res => {
-        let data = res.data.data;
-        console.log(data);
-        console.log(JSON.stringify(JSON.stringify(initialData)));
-        this.state = {
-          data: data
-        };
-      })
-      .catch(e => {
-        console.log(e);
+    .then(res => {
+      let data = res.data.data;
+      console.log(data);
+      this.setState({
+        ...this.state,
+        data: data
       });
+    })
+    .catch(e => {
+      console.log(e);
+    });
 
+    this.updateData = this.updateData.bind(this);
+  }
 
+  updateData(newData) {
+    let sendData = { data: newData };
+    axios({
+      method: "PUT",
+      url: `${process.env.REACT_APP_STORI_API_URL}/${this.state.username}/timeline`,
+      headers: { Authorization: _.getLocalStorage("auth_token")},
+      data: sendData,
+      crossDomain: true
+    })
+    .then(res => {
+      console.log(res);
+    })
+    .catch(e => {
+      console.log(e);
+    });
   }
 
   render() {
     if (this.state.data) {
-      return <Timeline data={this.state.data} />;
+      return <Timeline data={this.state.data} updateData={this.updateData}/>;
     } else {
       return (null);
     }
