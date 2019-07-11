@@ -66,7 +66,9 @@ public class TimelineAPIs {
 				.orElseThrow(() -> 
 				new UsernameNotFoundException("User Not Found with -> username: " + username)
 						);
-
+		
+		Long timelineId = user.getTimeline().getId();
+		timeline.setId(timelineId);
 		user.setTimeline(timeline);
 		userRepository.save(user);
 
