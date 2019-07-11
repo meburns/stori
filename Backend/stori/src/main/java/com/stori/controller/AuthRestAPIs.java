@@ -63,10 +63,10 @@ public class AuthRestAPIs {
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
-		Authentication authentication = authenticationManager.authenticate(
+		Authentication authentication = authenticationManager.authenticate( // Auth Token
 				new UsernamePasswordAuthenticationToken(
-						loginRequest.getUsername(),
-						loginRequest.getPassword()
+						loginRequest.getUsername(), // principal
+						loginRequest.getPassword()  // credentials
 						)
 				);
 

@@ -40,6 +40,10 @@ public class Timeline {
 	@NotFound(action = NotFoundAction.EXCEPTION)
 	private String name;
 	
+	@Column(name = "data")
+	@NotFound(action = NotFoundAction.EXCEPTION)
+	private String data;
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "timeline_boxes", 
 	joinColumns = @JoinColumn(name = "timeline_id"), 
