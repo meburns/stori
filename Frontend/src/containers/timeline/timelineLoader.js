@@ -48,8 +48,6 @@ class TimelineLoader extends React.Component {
     let data = null;
     let username = _.getLocalStorage("username");
 
-    axios.get(`${process.env.REACT_APP_STORI_API_URL}/${username}/timeline`);
-
     axios({
       method: "GET",
       url: `${process.env.REACT_APP_STORI_API_URL}/${username}/timeline`,
@@ -57,11 +55,12 @@ class TimelineLoader extends React.Component {
       crossDomain: true
     })
       .then(res => {
-        let data = res.data;
+        let data = res.data.data;
         console.log(data);
-        // this.state = {
-        //   data: data
-        // };
+        console.log(JSON.stringify(JSON.stringify(initialData)));
+        this.state = {
+          data: data
+        };
       })
       .catch(e => {
         console.log(e);

@@ -22,7 +22,7 @@ class UserLoader extends React.Component {
 
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_STORI_API_URL}/api/auth/signin`,
+      url: `${process.env.REACT_APP_STORI_API_URL}/auth/signin`,
       data: formData,
       crossDomain: true
     })
@@ -50,7 +50,7 @@ class UserLoader extends React.Component {
 
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_STORI_API_URL}/api/auth/signup`,
+      url: `${process.env.REACT_APP_STORI_API_URL}/auth/signup`,
       data: formData,
       crossDomain: true
     })
