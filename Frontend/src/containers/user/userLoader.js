@@ -18,17 +18,18 @@ class UserLoader extends React.Component {
     event.preventDefault();
     const data = new FormData(event.target);
     let formData = { 'username': data.get('username'), 'password': data.get('password')};
+    _.setLocalStorage("username", data.get('username'));
 
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_STORI_API_URL}/auth/signin`,
+      url: `${process.env.REACT_APP_STORI_API_URL}/api/auth/signin`,
       data: formData,
       crossDomain: true
     })
       .then(res => {
         let data = res.data;
         let token = data.accessToken;
-        _.setCookie(token);
+        _.setLocalStorage("auth_token", "Bearer " + token);
         _.updateURL("/");
       })
       .catch(e => {
@@ -49,7 +50,7 @@ class UserLoader extends React.Component {
 
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_STORI_API_URL}/auth/signup`,
+      url: `${process.env.REACT_APP_STORI_API_URL}/api/auth/signup`,
       data: formData,
       crossDomain: true
     })
@@ -64,7 +65,7 @@ class UserLoader extends React.Component {
 
   render() {
     if (this.props.match.path === "/logout") {
-      _.deleteCookie();
+      _.deleteLocalStorage("auth_token");
     }
     if (this.props.match.path === "/register") {
       return <Register handleSubmit={this.handleRegister}/>;

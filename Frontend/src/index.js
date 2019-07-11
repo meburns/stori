@@ -12,7 +12,7 @@ import DashboardLoader from "./containers/dashboard/dashboardLoader.js";
 import TimelineLoader from "./containers/timeline/timelineLoader.js";
 import UserLoader from "./containers/user/userLoader.js";
 
-const token = _.getOrSetCookie();
+const token = _.getLocalStorage("auth_token");
 
 const App = () => (
   <div>

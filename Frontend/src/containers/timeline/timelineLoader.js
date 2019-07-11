@@ -1,6 +1,6 @@
 import React from "react";
-// import axios from "axios";
-import { setLocalStorage, getLocalStorage } from "../../util.js";
+import axios from "axios";
+import _ from "../../util.js";
 
 import Timeline from "./timeline.js";
 const initialData = [
@@ -37,21 +37,47 @@ const initialData = [
 class TimelineLoader extends React.Component {
   constructor(props) {
     super(props);
-    let data = getLocalStorage("timelineData");
+    // let data = _getLocalStorage("timelineData");
+    //
+    // if (!data) {
+    //   data = JSON.stringify(initialData);
+    //   _setLocalStorage("timelineData", data);
+    // }
+    this.state = {};
 
-    if (!data) {
-      data = JSON.stringify(initialData);
-      setLocalStorage("timelineData", data);
-    }
+    let data = null;
+    let username = _.getLocalStorage("username");
 
-    this.state = {
-      data: data
-    };
+    axios.get(`${process.env.REACT_APP_STORI_API_URL}/${username}/timeline`);
+
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_STORI_API_URL}/${username}/timeline`,
+      headers: { Authorization: _.getLocalStorage("auth_token")},
+      crossDomain: true
+    })
+      .then(res => {
+        let data = res.data;
+        console.log(data);
+        // this.state = {
+        //   data: data
+        // };
+      })
+      .catch(e => {
+        console.log(e);
+      });
+
+
   }
 
   render() {
-    return <Timeline data={this.state.data} />;
+    if (this.state.data) {
+      return <Timeline data={this.state.data} />;
+    } else {
+      return (null);
+    }
   }
+
 }
 
 export default TimelineLoader;

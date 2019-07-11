@@ -14,7 +14,7 @@ import _ from "../../util.js";
 function TopMenu({ classes }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const token = _.getOrSetCookie();
+  const token = _.getLocalStorage("auth_token");
 
   function handleMenu(event) {
     setAnchorEl(event.currentTarget);

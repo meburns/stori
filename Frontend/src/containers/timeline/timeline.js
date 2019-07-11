@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+
 import { setLocalStorage } from "../../util.js";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -31,10 +37,31 @@ function Timeline({ data, classes }) {
       result.destination
     );
 
+    _updateStorage(items);
+  }
+
+  function _handleChange(boxId, blockId, event) {
+    let td = state.timelineData;
+    for (var i=0; i < td.length; i++) {
+      const box = td[i];
+      if (box.id.toString() === boxId.toString()) {
+        for (var j=0; j < box.data.length; j++) {
+          let block = box.data[j];
+          if (block.id.toString() === blockId.toString()) {
+            block.content = event.target.value;
+          }
+        }
+      }
+    }
+
+    _updateStorage(td);
+  }
+
+  function _updateStorage(newData) {
     setState({
-      timelineData: JSON.parse(JSON.stringify(items))
+      timelineData: JSON.parse(JSON.stringify(newData))
     });
-    setLocalStorage("timelineData", JSON.stringify(items));
+    setLocalStorage("timelineData", JSON.stringify(newData));
   }
 
   function getColumns() {
@@ -46,10 +73,7 @@ function Timeline({ data, classes }) {
         columns.push(
           <Droppable droppableId={`${i}`} key={i}>
             {(provided, snapshot) => (
-              <Grid
-                item
-                xs={3}
-              >
+              <Grid item xs >
                 <Card
                   {...provided.droppableProps}
                   ref={provided.innerRef}
@@ -63,9 +87,7 @@ function Timeline({ data, classes }) {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
                         >
-                          <p style={{ padding: "20px" }}>
-                            {item.content}
-                          </p>
+                          <OutlinedInput style={{ padding: "20px" }} value={item.content} onChange={(e)=>{_handleChange(column.id, item.id, e)}} />
                         </Card>
                       )}
                     </Draggable>
